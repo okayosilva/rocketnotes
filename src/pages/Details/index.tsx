@@ -1,7 +1,9 @@
+import { Container } from './styles'
+
 export function Details() {
   return (
-    <div>
+    <Container>
       <h1>Details</h1>
-    </div>
+    </Container>
   )
 }
