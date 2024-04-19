@@ -1,13 +1,14 @@
 import { ComponentProps } from 'react'
-import { Container } from './styles'
+import { ButtonStatusProps, Container } from './styles'
 
-type ButtonProps = ComponentProps<'button'> & {
-  title: string
-}
+type ButtonProps = ComponentProps<'button'> &
+  ButtonStatusProps & {
+    title: string
+  }
 
-export function ButtonText({ title, ...rest }: ButtonProps) {
+export function ButtonText({ title, $isActive, ...rest }: ButtonProps) {
   return (
-    <Container type="button" {...rest}>
+    <Container type="button" $isActive={$isActive} {...rest}>
       <span>{title}</span>
     </Container>
   )
