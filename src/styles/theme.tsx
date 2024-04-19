@@ -4,11 +4,12 @@ export default {
     'BG-800': '#10101A',
     'BG-900': '#08080D',
 
-    WHITE: '#FFF',
+    WHITE: '#e6e6e6',
     GREEN: '#0fa968',
 
     'GRAY-100': '#18181b',
-    'GRAY-300': '#1f2937',
+    'GRAY-200': '#7a7a7a',
+    'GRAY-300': '#dadada',
 
     RED: '#FF002E',
   },

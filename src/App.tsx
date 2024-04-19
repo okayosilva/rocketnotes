@@ -1,7 +1,11 @@
 import { Details } from './pages/Details'
 
 function App() {
-  return <Details />
+  return (
+    <>
+      <Details />
+    </>
+  )
 }
 
 export default App
