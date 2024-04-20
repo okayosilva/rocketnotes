@@ -1,5 +1,6 @@
 import { ArrowLeft, User, Mail, Lock, Camera } from 'lucide-react'
 import { Avatar, Container, Form } from './styles'
+import { Link } from 'react-router-dom'
 
 import { Input } from '../../components/input'
 import { Button } from '../../components/button'
@@ -8,9 +9,9 @@ export function Profile() {
   return (
     <Container>
       <header>
-        <a href="">
+        <Link to="/">
           <ArrowLeft />
-        </a>
+        </Link>
       </header>
 
       <Form>

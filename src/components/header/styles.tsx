@@ -21,7 +21,7 @@ export const Profile = styled.div`
   align-items: center;
   gap: 1rem;
 
-  > img {
+  a > img {
     width: 4rem;
     height: 4rem;
 

@@ -1,6 +1,7 @@
 import { Button } from '../../components/button'
 import { Input } from '../../components/input'
 
+import { Link } from 'react-router-dom'
 import { Container, Form, Background } from './styles'
 
 import { Mail, Lock } from 'lucide-react'
@@ -19,7 +20,7 @@ export function SignIn() {
 
         <Button title="Entrar" />
 
-        <a href="#">Criar conta</a>
+        <Link to="/register">Criar conta</Link>
       </Form>
     </Container>
   )

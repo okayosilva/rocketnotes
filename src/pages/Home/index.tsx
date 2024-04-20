@@ -49,7 +49,7 @@ export function Home() {
           />
         </Section>
       </Content>
-      <NewNote>
+      <NewNote to="/New">
         <Plus size={18} />
         <span>Criar nova nota</span>
       </NewNote>

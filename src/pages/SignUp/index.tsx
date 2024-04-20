@@ -3,6 +3,7 @@ import { Mail, User, Lock } from 'lucide-react'
 import { Input } from '../../components/input'
 import { Button } from '../../components/button'
 
+import { Link } from 'react-router-dom'
 import { Container, Form, Background } from './styles'
 
 export function SignUp() {
@@ -20,7 +21,7 @@ export function SignUp() {
 
         <Button title="Cadastrar" />
 
-        <a href="#">Voltar para o login</a>
+        <Link to="/">Voltar para o login</Link>
       </Form>
     </Container>
   )

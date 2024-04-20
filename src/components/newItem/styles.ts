@@ -18,7 +18,7 @@ export const Container = styled.div<ContainerProps>`
     isNew ? `2px dashed ${theme.COLORS['GRAY-200']}` : 'none'};
 
   margin-bottom: 0.5rem;
-  margin-top: 1rem;
+
   border-radius: 0.75rem;
   padding-right: 1rem;
 
