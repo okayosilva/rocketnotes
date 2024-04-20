@@ -1,12 +1,14 @@
-// import { Details } from './pages/Details'
+// import { SignIn } from './pages/SignIn'
+// import { SignUp } from './pages/SignUp'
+
 // import { Home } from './pages/Home'
-import { SignIn } from './pages/SignIn'
-import { SignUp } from './pages/SignUp'
+import { Profile } from './pages/Profile'
+// import { Details } from './pages/Details'
 
 function App() {
   return (
     <>
-      <SignUp />
+      <Profile />
     </>
   )
 }
