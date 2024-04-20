@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const ContainerHeader = styled.header`
   width: 100%;
-  max-height: 6.5rem;
+  min-height: 6.5rem;
   padding: 1rem 4rem;
   position: sticky;
   flex-wrap: wrap;

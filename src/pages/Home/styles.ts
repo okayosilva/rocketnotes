@@ -37,7 +37,8 @@ export const Menu = styled.ul`
   flex-direction: column;
   text-align: center;
 
-  padding-top: 4rem 4rem 0;
+  list-style-type: none;
+  padding: 4rem 4rem 0;
 
   background-color: ${({ theme }) => theme.COLORS['BG-800']};
 `
@@ -49,7 +50,11 @@ export const SearchContent = styled.div`
 
   padding: 4rem;
 `
-export const Content = styled.div``
+export const Content = styled.div`
+  grid-area: content;
+  overflow-y: auto;
+  padding: 0 4rem;
+`
 export const NewNote = styled.button`
   display: flex;
   justify-content: center;

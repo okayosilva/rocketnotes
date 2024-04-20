@@ -9,5 +9,5 @@ export const Container = styled.span`
 
   background-color: ${({ theme }) => theme.COLORS.GREEN};
   color: ${({ theme }) => theme.COLORS['BG-800']};
-  margin-right: 0.5rem;
+  //margin-right: 0.5rem;
 `

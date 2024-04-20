@@ -12,6 +12,8 @@ import { Plus, Search } from 'lucide-react'
 import { Header } from '../../components/header'
 import { ButtonText } from '../../components/buttonText'
 import { Input } from '../../components/input'
+import { Note } from '../../components/note'
+import { Section } from '../../components/section'
 
 export function Home() {
   return (
@@ -36,7 +38,17 @@ export function Home() {
       <SearchContent>
         <Input placeholder="Pesquisar pelo título" icon={Search} />
       </SearchContent>
-      <Content></Content>
+      <Content>
+        <Section title="Minhas notas">
+          <Note
+            title="React"
+            tags={[
+              { id: '1', name: 'react' },
+              { id: '2', name: 'rocketseat' },
+            ]}
+          />
+        </Section>
+      </Content>
       <NewNote>
         <Plus size={18} />
         <span>Criar nova nota</span>
