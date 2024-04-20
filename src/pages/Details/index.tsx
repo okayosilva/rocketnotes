@@ -1,4 +1,4 @@
-import { Tag } from '../../components/Tag'
+import { Tag } from '../../components/tag'
 import { Button } from '../../components/button'
 import { ButtonText } from '../../components/buttonText'
 import { Header } from '../../components/header'

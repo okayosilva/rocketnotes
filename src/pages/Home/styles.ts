@@ -37,11 +37,18 @@ export const Menu = styled.ul`
   flex-direction: column;
   text-align: center;
 
-  padding-top: 4rem;
+  padding-top: 4rem 4rem 0;
 
   background-color: ${({ theme }) => theme.COLORS['BG-800']};
 `
-export const Search = styled.div``
+export const SearchContent = styled.div`
+  grid-area: search;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 4rem;
+`
 export const Content = styled.div``
 export const NewNote = styled.button`
   display: flex;

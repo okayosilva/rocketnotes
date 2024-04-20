@@ -1,7 +1,17 @@
-import { Plus } from 'lucide-react'
-import { Container, Brand, Menu, Search, Content, NewNote } from './styles'
+import {
+  Container,
+  Brand,
+  Menu,
+  SearchContent,
+  Content,
+  NewNote,
+} from './styles'
+
+import { Plus, Search } from 'lucide-react'
+
 import { Header } from '../../components/header'
 import { ButtonText } from '../../components/buttonText'
+import { Input } from '../../components/input'
 
 export function Home() {
   return (
@@ -23,7 +33,9 @@ export function Home() {
         </li>
       </Menu>
 
-      <Search></Search>
+      <SearchContent>
+        <Input placeholder="Pesquisar pelo título" icon={Search} />
+      </SearchContent>
       <Content></Content>
       <NewNote>
         <Plus size={18} />
