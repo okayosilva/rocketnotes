@@ -1,5 +1,5 @@
-import { ArrowLeft, User, Mail, Lock } from 'lucide-react'
-import { Container, Form } from './styles'
+import { ArrowLeft, User, Mail, Lock, Camera } from 'lucide-react'
+import { Avatar, Container, Form } from './styles'
 
 import { Input } from '../../components/input'
 import { Button } from '../../components/button'
@@ -14,6 +14,16 @@ export function Profile() {
       </header>
 
       <Form>
+        <Avatar>
+          <img
+            src="https://github.com/okayosilva.png"
+            alt="Imagem do usuário"
+          />
+          <label htmlFor="avatar">
+            <Camera size={20} />
+            <input type="file" id="avatar" />
+          </label>
+        </Avatar>
         <Input placeholder="Nome" type="text" icon={User} />
         <Input placeholder="E-mail" type="text" icon={Mail} />
         <Input placeholder="Senha Atual" type="password" icon={Lock} />

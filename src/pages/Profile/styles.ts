@@ -29,8 +29,50 @@ export const Container = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: .8rem;
+  gap: 0.8rem;
 
   max-width: 21.25rem;
   margin: 1.875rem auto 0;
+
+  > div:nth-child(4) {
+    margin-top: 0.8rem;
+  }
+`
+export const Avatar = styled.div`
+  position: relative;
+  margin: -7.75rem auto 1.5rem;
+
+  width: 11.625rem;
+  height: 11.625rem;
+
+  > img {
+    width: 11.625rem;
+    height: 11.625rem;
+    border-radius: 50%;
+  }
+
+  label {
+    width: 3rem;
+    height: 3rem;
+    background-color: ${({ theme }) => theme.COLORS.GREEN};
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+
+    cursor: pointer;
+
+    input {
+      display: none;
+    }
+
+    svg {
+      color: ${({ theme }) => theme.COLORS.WHITE};
+    }
+  }
 `
