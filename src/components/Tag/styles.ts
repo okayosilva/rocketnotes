@@ -8,6 +8,6 @@ export const Container = styled.span`
   padding: 0.25rem 0.75rem;
 
   background-color: ${({ theme }) => theme.COLORS.GREEN};
-  color: ${({ theme }) => theme.COLORS['BG-800']};
+  color: ${({ theme }) => theme.COLORS['GRAY-100']};
   //margin-right: 0.5rem;
 `

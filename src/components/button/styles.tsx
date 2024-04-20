@@ -4,11 +4,12 @@ export const Container = styled.button`
   width: 100%;
   cursor: pointer;
   background-color: ${({ theme }) => theme.COLORS.GREEN};
-  color: ${({ theme }) => theme.COLORS['BG-800']};
+  color: ${({ theme }) => theme.COLORS['GRAY-100']};
 
-  height: 3.5rem;
+  max-height: 3.5rem;
+
   border: 0;
-  padding: 0 1rem;
+  padding: 1rem 0 1rem;
 
   border-radius: 10px;
   font-weight: 500;
