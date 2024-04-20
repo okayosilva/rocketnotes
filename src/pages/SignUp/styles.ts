@@ -34,11 +34,10 @@ export const Form = styled.form`
   }
 
   > a {
-    margin-top: 2rem;
-    color: ${({ theme }) => theme.COLORS.GREEN};
+    color: ${({ theme }) => theme.COLORS['GRAY-200']};
 
     &:hover {
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ theme }) => theme.COLORS.GREEN};
     }
   }
 `
