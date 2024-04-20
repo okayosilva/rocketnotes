@@ -2,13 +2,14 @@
 // import { SignUp } from './pages/SignUp'
 
 // import { Home } from './pages/Home'
-import { Profile } from './pages/Profile'
+import { New } from './pages/New'
+// import { Profile } from './pages/Profile'
 // import { Details } from './pages/Details'
 
 function App() {
   return (
     <>
-      <Profile />
+      <New />
     </>
   )
 }

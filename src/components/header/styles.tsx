@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const ContainerHeader = styled.header`
+  grid-area: header;
+
   width: 100%;
   min-height: 6.5rem;
   padding: 1rem 4rem;
