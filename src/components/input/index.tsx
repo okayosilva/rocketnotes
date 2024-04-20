@@ -2,7 +2,7 @@ import { ComponentProps, ElementType } from 'react'
 import { Container } from './styles'
 
 type InputProps = ComponentProps<'input'> & {
-  icon: ElementType
+  icon?: ElementType
 }
 export function Input({ icon: Icon, ...rest }: InputProps) {
   return (

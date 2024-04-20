@@ -37,7 +37,7 @@ export const Content = styled.div`
   min-height: 100vh;
   max-width: 34.375rem;
   margin: 0 auto;
-  margin-top: 4rem;
+
   padding: 6rem 1.5rem 2.5rem 1.5rem;
   gap: 1.5rem;
 
@@ -60,5 +60,7 @@ export const Content = styled.div`
   }
 `
 export const Wrapper = styled.div`
+  display: flex;
   padding-top: 1.5rem;
+  gap: 0.5rem;
 `
