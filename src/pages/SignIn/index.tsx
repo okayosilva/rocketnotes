@@ -8,6 +8,7 @@ import { Mail, Lock } from 'lucide-react'
 export function SignIn() {
   return (
     <Container>
+      <Background />
       <Form>
         <h1>Rocket Notes</h1>
         <p>Aplicação para salvar e gerenciar seus links úteis.</p>
@@ -20,8 +21,6 @@ export function SignIn() {
 
         <a href="#">Criar conta</a>
       </Form>
-
-      <Background />
     </Container>
   )
 }
