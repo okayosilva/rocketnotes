@@ -4,13 +4,11 @@ import { Input } from '../../components/input'
 import { Link } from 'react-router-dom'
 import { Container, Form, Background } from './styles'
 
-import { useContext } from 'react'
-import { MyContext } from '../../myContext'
-
+import { useAuth } from '../../hooks/authContext'
 import { Mail, Lock } from 'lucide-react'
 
 export function SignIn() {
-  const data = useContext(MyContext)
+  const data = useAuth()
   console.log(data)
   return (
     <Container>
