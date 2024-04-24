@@ -4,7 +4,7 @@ import { Input } from '../../components/input'
 import { Link } from 'react-router-dom'
 import { Container, Form, Background } from './styles'
 
-import { useAuth, SignInCredentials } from '../../hooks/authContext'
+import { useAuth, SignInCredentials } from '../../hooks/auth'
 import { Mail, Lock } from 'lucide-react'
 import { useState } from 'react'
 
