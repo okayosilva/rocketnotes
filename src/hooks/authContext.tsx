@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createContext, useContext, ReactNode, useState } from 'react'
 import { api } from '../services/api'
 
@@ -34,8 +35,8 @@ function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.authorization = `Bearer ${token}`
       setUser(user)
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message)
+      if ((error as any).response) {
+        alert((error as any).response.data.message)
       } else {
         alert('Erro ao fazer login, tente novamente mais tarde.')
       }
