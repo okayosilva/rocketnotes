@@ -4,9 +4,14 @@ import { Input } from '../../components/input'
 import { Link } from 'react-router-dom'
 import { Container, Form, Background } from './styles'
 
+import { useContext } from 'react'
+import { MyContext } from '../../myContext'
+
 import { Mail, Lock } from 'lucide-react'
 
 export function SignIn() {
+  const data = useContext(MyContext)
+  console.log(data)
   return (
     <Container>
       <Background />
