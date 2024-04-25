@@ -2,7 +2,10 @@ import { ContainerHeader, Profile, ToggleThemeButton } from './styles'
 import { Link } from 'react-router-dom'
 import { Power } from 'lucide-react'
 
+import { useAuth } from '../../hooks/auth'
+
 export function Header() {
+  const { signOut } = useAuth()
   return (
     <ContainerHeader>
       <Profile>
@@ -14,7 +17,7 @@ export function Header() {
           <strong>Kayo Silva</strong>
         </div>
       </Profile>
-      <ToggleThemeButton type="button">
+      <ToggleThemeButton type="button" onClick={() => signOut()}>
         <Power size={24} />
       </ToggleThemeButton>
     </ContainerHeader>

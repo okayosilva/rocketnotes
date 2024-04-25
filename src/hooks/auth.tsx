@@ -22,6 +22,7 @@ export interface SignInCredentials {
 interface AuthContextData {
   user: User | null
   signIn(credentials: SignInCredentials): Promise<void>
+  signOut(): void
 }
 
 interface AuthProviderProps {
@@ -39,7 +40,6 @@ function AuthProvider({ children }: AuthProviderProps) {
     try {
       const response = await api.post('/sessions', { email, password })
       const { user, token } = response.data
-      console.log(response.data)
 
       localStorage.setItem('@rocketnotes:token', token)
       localStorage.setItem('@rocketnotes:user', JSON.stringify(user))
@@ -56,6 +56,12 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  function signOut() {
+    localStorage.removeItem('@rocketnotes:token')
+    localStorage.removeItem('@rocketnotes:user')
+    setUser(null)
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('@rocketnotes:token')
     const user = localStorage.getItem('@rocketnotes:user')
@@ -68,7 +74,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, signIn }}>
+    <AuthContext.Provider value={{ user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )
