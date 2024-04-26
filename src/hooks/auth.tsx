@@ -8,11 +8,12 @@ import {
 } from 'react'
 import { api } from '../services/api'
 
-interface User {
-  id: string
+export interface UserInterface {
+  id?: string
   name: string
   email: string
-  // Adicione outros campos, se necessário
+  password?: string
+  old_Password?: string
 }
 export interface SignInCredentials {
   email: string
@@ -20,9 +21,10 @@ export interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: User | null
+  user: UserInterface | null
   signIn(credentials: SignInCredentials): Promise<void>
   signOut(): void
+  updateProfile(userData: UserInterface): void
 }
 
 interface AuthProviderProps {
@@ -32,7 +34,7 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<UserInterface | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [token, setToken] = useState<string | null>(null)
 
@@ -44,7 +46,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem('@rocketnotes:token', token)
       localStorage.setItem('@rocketnotes:user', JSON.stringify(user))
 
-      api.defaults.headers.authorization = `Bearer ${token}`
+      api.defaults.headers.common.Authorization = `Bearer ${token}`
       setUser(user)
       setToken(token)
     } catch (error) {
@@ -62,19 +64,34 @@ function AuthProvider({ children }: AuthProviderProps) {
     setUser(null)
   }
 
+  async function updateProfile(userData: UserInterface) {
+    try {
+      await api.put('/users', userData)
+      localStorage.setItem('@rocketnotes:user', JSON.stringify(userData))
+      setUser(userData)
+      alert('Perfil atualizado com sucesso!')
+    } catch (error) {
+      if ((error as any).response) {
+        alert((error as any).response.data.message)
+      } else {
+        alert('Erro ao fazer login, tente novamente mais tarde.')
+      }
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem('@rocketnotes:token')
     const user = localStorage.getItem('@rocketnotes:user')
 
     if (token && user) {
-      api.defaults.headers.authorization = `Bearer ${token}`
+      api.defaults.headers.common.Authorization = `Bearer ${token}`
       setUser(JSON.parse(user))
       setToken(token)
     }
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, signIn, signOut, updateProfile }}>
       {children}
     </AuthContext.Provider>
   )
