@@ -13,7 +13,7 @@ export interface UserInterface {
   name: string
   email: string
   password?: string
-  old_Password?: string
+  old_password?: string
 }
 export interface SignInCredentials {
   email: string
@@ -66,6 +66,7 @@ function AuthProvider({ children }: AuthProviderProps) {
 
   async function updateProfile(userData: UserInterface) {
     try {
+      console.log(userData)
       await api.put('/users', userData)
       localStorage.setItem('@rocketnotes:user', JSON.stringify(userData))
       setUser(userData)

@@ -20,8 +20,8 @@ export function Profile() {
     const user: UserInterface = {
       name,
       email,
-      old_Password: oldPassword,
       password: newPassword,
+      old_password: oldPassword,
     }
 
     await updateProfile(user)
