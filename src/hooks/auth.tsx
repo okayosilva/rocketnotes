@@ -12,6 +12,7 @@ export interface UserInterface {
   id?: string
   name: string
   email: string
+  avatar?: string
   password?: string
   old_password?: string
 }
@@ -24,7 +25,7 @@ interface AuthContextData {
   user: UserInterface | null
   signIn(credentials: SignInCredentials): Promise<void>
   signOut(): void
-  updateProfile(userData: UserInterface): void
+  updateProfile(userData: UserInterface, avatarFile: File): void
 }
 
 interface AuthProviderProps {
@@ -47,6 +48,7 @@ function AuthProvider({ children }: AuthProviderProps) {
       localStorage.setItem('@rocketnotes:user', JSON.stringify(user))
 
       api.defaults.headers.common.Authorization = `Bearer ${token}`
+
       setUser(user)
       setToken(token)
     } catch (error) {
@@ -64,11 +66,21 @@ function AuthProvider({ children }: AuthProviderProps) {
     setUser(null)
   }
 
-  async function updateProfile(userData: UserInterface) {
+  async function updateProfile(userData: UserInterface, AvatarFile: File) {
     try {
-      console.log(userData)
+      if (AvatarFile) {
+        const fileUploadForm = new FormData()
+        fileUploadForm.append('avatar', AvatarFile)
+
+        const response = await api.patch('/users/avatar', fileUploadForm)
+        user!.avatar = response.data.avatar
+        console.log(user!.avatar)
+      }
+
       await api.put('/users', userData)
+      console.log(user.avatar)
       localStorage.setItem('@rocketnotes:user', JSON.stringify(userData))
+
       setUser(userData)
       alert('Perfil atualizado com sucesso!')
     } catch (error) {

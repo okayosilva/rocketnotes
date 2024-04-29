@@ -1,6 +1,8 @@
 import { useAuth, UserInterface } from '../../hooks/auth'
+import { api } from '../../services/api'
 
 import { ArrowLeft, User, Mail, Lock, Camera } from 'lucide-react'
+import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 import { Avatar, Container, Form } from './styles'
 import { Link } from 'react-router-dom'
 
@@ -16,6 +18,15 @@ export function Profile() {
   const [newPassword, setNewPassword] = useState('')
   const [oldPassword, setOldPassword] = useState('')
 
+  const avatarUrl = user?.avatar
+    ? `${api.defaults.baseURL}/files/${user.avatar}`
+    : avatarPlaceholder
+
+  console.log(user?.avatar)
+
+  const [avatar, setAvatar] = useState('' as string)
+  const [avatarFile, setAvatarFile] = useState<File>()
+
   async function handleUpdate() {
     const user: UserInterface = {
       name,
@@ -24,7 +35,17 @@ export function Profile() {
       old_password: oldPassword,
     }
 
-    await updateProfile(user)
+    await updateProfile(user, avatarFile!)
+  }
+
+  function handleChangeAvatar(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return
+
+    const file = e.target.files[0]
+    setAvatarFile(file)
+
+    const imagePreview = URL.createObjectURL(file)
+    setAvatar(imagePreview)
   }
 
   return (
@@ -37,13 +58,10 @@ export function Profile() {
 
       <Form>
         <Avatar>
-          <img
-            src="https://github.com/okayosilva.png"
-            alt="Imagem do usuário"
-          />
+          <img src={avatarUrl} alt={user?.name} />
           <label htmlFor="avatar">
             <Camera size={20} />
-            <input type="file" id="avatar" />
+            <input type="file" id="avatar" onChange={handleChangeAvatar} />
           </label>
         </Avatar>
         <Input
