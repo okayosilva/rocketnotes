@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
 import { Container, Form } from './styles'
 import { Header } from '../../components/header'
 import { Input } from '../../components/input'
@@ -6,9 +9,18 @@ import { Section } from '../../components/section'
 import { NewItem } from '../../components/newItem'
 import { Button } from '../../components/button'
 
-import { Link } from 'react-router-dom'
-
 export function New() {
+  const [newLink, setNewLink] = useState('')
+  const [links, setLinks] = useState<string[]>([])
+
+  function handleAddLink() {
+    setLinks((prevState) => [...prevState, newLink])
+    setNewLink('')
+  }
+
+  function handleRemoveLink(linkDeleted: string) {
+    setLinks((prevState) => prevState.filter((link) => link !== linkDeleted))
+  }
   return (
     <Container>
       <Header />
@@ -24,8 +36,22 @@ export function New() {
 
           <Section title="Links úteis">
             <div className="wrapper">
-              <NewItem value="New Link" isNew />
-              <NewItem value="New Link" />
+              {links.map((link, index) => {
+                return (
+                  <NewItem
+                    key={index}
+                    value={link}
+                    onClick={() => handleRemoveLink(link)}
+                  />
+                )
+              })}
+
+              <NewItem
+                value={newLink}
+                isNew
+                onChange={(e) => setNewLink(e.target.value)}
+                onClick={handleAddLink}
+              />
             </div>
           </Section>
 
