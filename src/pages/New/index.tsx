@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { Container, Form } from './styles'
 import { Header } from '../../components/header'
@@ -8,13 +8,18 @@ import { TextArea } from '../../components/textArea'
 import { Section } from '../../components/section'
 import { NewItem } from '../../components/newItem'
 import { Button } from '../../components/button'
+import { api } from '../../services/api'
 
 export function New() {
+  const navigation = useNavigate()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+
   const [newLink, setNewLink] = useState('')
   const [links, setLinks] = useState<string[]>([])
 
-  const [tags, setTags] = useState<string[]>([])
   const [newTag, setNewTag] = useState('')
+  const [tags, setTags] = useState<string[]>([])
 
   function handleAddLink() {
     setLinks((prevState) => [...prevState, newLink])
@@ -34,6 +39,40 @@ export function New() {
     setTags((prevState) => prevState.filter((tag) => tag !== tagDeleted))
   }
 
+  async function onSaveNewNote() {
+    if (!title) {
+      alert('Você precisa informar um título para a nota!')
+      return
+    }
+
+    if (newLink) {
+      alert('Parece que você esqueceu de adicionar o link!')
+      return
+    }
+
+    if (newTag) {
+      alert('Parece que você esqueceu de adicionar a tag!')
+      return
+    }
+
+    if (!description && !links.length && !tags.length) {
+      alert(
+        'Você precisa informar pelo menos uma observação, link e tag para criar uma a nota!',
+      )
+      return
+    }
+
+    await api.post('/notes', {
+      title,
+      description,
+      tags,
+      links,
+    })
+
+    alert('Nota criada com sucesso!')
+    navigation('/')
+  }
+
   return (
     <Container>
       <Header />
@@ -44,8 +83,15 @@ export function New() {
             <Link to="/">Voltar</Link>
           </header>
 
-          <Input placeholder="Título" type="text" />
-          <TextArea placeholder="Observações" />
+          <Input
+            placeholder="Título"
+            type="text"
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <TextArea
+            placeholder="Observações"
+            onChange={(e) => setDescription(e.target.value)}
+          />
 
           <Section title="Links úteis">
             <div className="wrapper">
@@ -79,6 +125,7 @@ export function New() {
                   />
                 )
               })}
+
               <NewItem
                 value={newTag}
                 isNew
@@ -87,7 +134,7 @@ export function New() {
               />
             </div>
           </Section>
-          <Button title="Salvar" />
+          <Button title="Salvar" onClick={onSaveNewNote} />
         </Form>
       </main>
     </Container>

@@ -33,7 +33,7 @@ export function SignIn() {
 
         <Input
           type="password"
-          placeholder="E-mail"
+          placeholder="Senha"
           icon={Lock}
           onChange={(e) => setPassword(e.target.value)}
         />
