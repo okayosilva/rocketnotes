@@ -14,8 +14,26 @@ import { ButtonText } from '../../components/buttonText'
 import { Input } from '../../components/input'
 import { Note } from '../../components/note'
 import { Section } from '../../components/section'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
+
+interface Tag {
+  id: string
+  name: string
+}
 
 export function Home() {
+  const [tags, setTags] = useState<Tag[]>([])
+
+  useEffect(() => {
+    async function loadTags() {
+      api.get('/tags').then((response) => {
+        setTags(response.data)
+      })
+    }
+
+    loadTags()
+  }, [])
   return (
     <Container>
       <Brand>
@@ -27,12 +45,7 @@ export function Home() {
         <li>
           <ButtonText title="Todos" $isActive="true" />
         </li>
-        <li>
-          <ButtonText title="React" />
-        </li>
-        <li>
-          <ButtonText title="Nodejs" />
-        </li>
+        {tags && tags.map((tag) => <li key={tag.id}>{tag.name}</li>)}
       </Menu>
 
       <SearchContent>
