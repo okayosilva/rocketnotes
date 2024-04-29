@@ -18,24 +18,21 @@ export function Profile() {
   const [newPassword, setNewPassword] = useState('')
   const [oldPassword, setOldPassword] = useState('')
 
-  const avatarUrl = user?.avatar
-    ? `${api.defaults.baseURL}/files/${user.avatar}`
-    : avatarPlaceholder
+  const avatarUrl = `${api.defaults.baseURL}/files/${user!.avatar}`
+  const avatarValid = user?.avatar ? user?.avatar : avatarPlaceholder
 
-  console.log(user?.avatar)
-
-  const [avatar, setAvatar] = useState('' as string)
+  const [avatar, setAvatar] = useState(user?.avatar ? avatarUrl : avatarValid)
   const [avatarFile, setAvatarFile] = useState<File>()
 
   async function handleUpdate() {
     const user: UserInterface = {
       name,
       email,
-      password: newPassword,
       old_password: oldPassword,
+      password: newPassword,
     }
 
-    await updateProfile(user, avatarFile!)
+    updateProfile(user, avatarFile!)
   }
 
   function handleChangeAvatar(e: React.ChangeEvent<HTMLInputElement>) {
@@ -58,7 +55,7 @@ export function Profile() {
 
       <Form>
         <Avatar>
-          <img src={avatarUrl} alt={user?.name} />
+          <img src={avatar} alt={user?.name} />
           <label htmlFor="avatar">
             <Camera size={20} />
             <input type="file" id="avatar" onChange={handleChangeAvatar} />
