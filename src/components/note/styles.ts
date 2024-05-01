@@ -11,6 +11,13 @@ export const Container = styled.button`
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 
+  transition: all 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
   > span {
     display: block;
     text-align: left;

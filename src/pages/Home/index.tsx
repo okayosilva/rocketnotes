@@ -22,8 +22,29 @@ interface Tag {
   name: string
 }
 
+interface Note {
+  id: number
+  title: string
+  tags: Tag[]
+}
+
 export function Home() {
+  const [search, setSearch] = useState<string>('')
   const [tags, setTags] = useState<Tag[]>([])
+  const [tagsSelected, setTagsSelected] = useState<string[]>([])
+
+  const [notes, setNotes] = useState<Note[]>([])
+
+  function handleTagSelected(tagName: string) {
+    const alteredSelectedTags = tagsSelected.includes(tagName)
+
+    if (alteredSelectedTags) {
+      const filteredTags = tagsSelected.filter((tag) => tag !== tagName)
+      return setTagsSelected(filteredTags)
+    }
+
+    setTagsSelected((prevState) => [...prevState, tagName])
+  }
 
   useEffect(() => {
     async function loadTags() {
@@ -34,6 +55,18 @@ export function Home() {
 
     loadTags()
   }, [])
+
+  useEffect(() => {
+    async function loadNotes() {
+      const response = await api.get(
+        `/notes?title=${search}&tags=${tagsSelected}`,
+      )
+
+      setNotes(response.data)
+    }
+    loadNotes()
+  }, [tagsSelected, search])
+
   return (
     <Container>
       <Brand>
@@ -43,23 +76,36 @@ export function Home() {
 
       <Menu>
         <li>
-          <ButtonText title="Todos" $isActive="true" />
+          <ButtonText
+            title="Todos"
+            $isActive={tagsSelected.length === 0 ? 'true' : 'false'}
+            onClick={() => setTagsSelected([])}
+          />
         </li>
-        {tags && tags.map((tag) => <li key={tag.id}>{tag.name}</li>)}
+        {tags &&
+          tags.map((tag) => (
+            <ButtonText
+              key={tag.id}
+              title={tag.name}
+              onClick={() => handleTagSelected(tag.name)}
+              $isActive={tagsSelected.includes(tag.name) ? 'true' : 'false'}
+            />
+          ))}
       </Menu>
 
       <SearchContent>
-        <Input placeholder="Pesquisar pelo título" icon={Search} />
+        <Input
+          placeholder="Pesquisar pelo título"
+          icon={Search}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       </SearchContent>
       <Content>
         <Section title="Minhas notas">
-          <Note
-            title="React"
-            tags={[
-              { id: '1', name: 'react' },
-              { id: '2', name: 'rocketseat' },
-            ]}
-          />
+          {notes.map((note) => (
+            <Note key={note.id} title={note.title} tags={note.tags} />
+          ))}
         </Section>
       </Content>
       <NewNote to="/New">
