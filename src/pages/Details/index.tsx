@@ -5,50 +5,93 @@ import { Header } from '../../components/header'
 import { Section } from '../../components/section'
 import { Container, Content, Links, Wrapper } from './styles'
 
+import { useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
+
+interface NoteInterface {
+  id: string
+  title: string
+  description: string
+  links: {
+    id: string
+    url: string
+  }[]
+  tags: {
+    id: string
+    name: string
+  }[]
+}
+
 export function Details() {
+  const navigate = useNavigate()
+  const params = useParams()
+  const [note, setNote] = useState<NoteInterface>()
+
+  function handleBackToHome() {
+    navigate('/')
+  }
+
+  async function handleRemove() {
+    const confirmation = window.confirm('Deseja realmente excluir esta nota?')
+
+    if (confirmation) {
+      await api.delete(`/notes/${params.id}`).then(() => {
+        alert('Nota excluída com sucesso!')
+        return handleBackToHome()
+      })
+    }
+  }
+
+  useEffect(() => {
+    async function loadNote() {
+      await api.get(`/notes/${params.id}`).then((response) => {
+        setNote(response.data)
+      })
+    }
+
+    loadNote()
+  }, [])
   return (
     <Container>
       <Header />
-      <main>
-        <Content>
-          <ButtonText title="Excluir nota" />
-          <div className="">
-            <h1>Introdução ao React</h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the standard dummy text ever since
-              the 1500s, when an unknown printer took a galley of type and
-              scrambled it to make a type specimen book. It has survived not
-              only five centuries, but also the leap into electronic
-              typesetting, remaining essentially unchanged. It was popularised
-              in the 1960s with the release of Letraset sheets containing Lorem
-              Ipsum passages, and more recently with desktop publishing software
-              like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-          </div>
-          <div className="">
-            <Section title="Links Úteis">
-              <Links>
-                <li>
-                  <a href="#">https://rocketseat.com.br</a>
-                </li>
-                <li>
-                  <a href="#">https://rocketseat.com.br</a>
-                </li>
-              </Links>
-            </Section>
+      {note && (
+        <main>
+          <Content>
+            <ButtonText title="Excluir nota" onClick={handleRemove} />
+            <div className="">
+              <h1>{note.title}</h1>
+              <p>{note.description}</p>
+            </div>
+            <div className="">
+              {note.links.length > 0 && (
+                <Section title="Links Úteis">
+                  <Links>
+                    {note.links.map((link) => (
+                      <li key={String(link.id)}>
+                        <a href={link.url} target="_blank" rel="noreferrer">
+                          {link.url}
+                        </a>
+                      </li>
+                    ))}
+                  </Links>
+                </Section>
+              )}
+              {note.tags.length > 0 && (
+                <Section title="Marcadores">
+                  <Wrapper>
+                    {note.tags.map((tag) => (
+                      <Tag key={String(tag.id)} title={tag.name} />
+                    ))}
+                  </Wrapper>
+                </Section>
+              )}
+            </div>
 
-            <Section title="Marcadores">
-              <Wrapper>
-                <Tag title="aqui" />
-                <Tag title="aqui" />
-              </Wrapper>
-            </Section>
-          </div>
-
-          <Button title="Editar nota" />
-        </Content>
-      </main>
+            <Button title="Voltar" onClick={handleBackToHome} />
+          </Content>
+        </main>
+      )}
     </Container>
   )
 }

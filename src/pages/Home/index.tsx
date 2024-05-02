@@ -24,7 +24,7 @@ interface Tag {
   name: string
 }
 
-interface Note {
+export interface NoteInterface {
   id: number
   title: string
   tags: Tag[]
@@ -37,7 +37,7 @@ export function Home() {
   const [tags, setTags] = useState<Tag[]>([])
   const [tagsSelected, setTagsSelected] = useState<string[]>([])
 
-  const [notes, setNotes] = useState<Note[]>([])
+  const [notes, setNotes] = useState<NoteInterface[]>([])
 
   function handleTagSelected(tagName: string) {
     const alteredSelectedTags = tagsSelected.includes(tagName)
