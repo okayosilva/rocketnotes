@@ -4,7 +4,7 @@ import { api } from '../../services/api'
 import { ArrowLeft, User, Mail, Lock, Camera } from 'lucide-react'
 import avatarPlaceholder from '../../assets/avatar_placeholder.svg'
 import { Avatar, Container, Form } from './styles'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { Input } from '../../components/input'
 import { Button } from '../../components/button'
@@ -12,6 +12,7 @@ import { useState } from 'react'
 
 export function Profile() {
   const { user, updateProfile } = useAuth()
+  const navigation = useNavigate()
 
   const [name, setName] = useState(user ? user.name : '')
   const [email, setEmail] = useState(user ? user.email : '')
@@ -35,6 +36,10 @@ export function Profile() {
     updateProfile(user, avatarFile!)
   }
 
+  function handleBack() {
+    navigation(-1)
+  }
+
   function handleChangeAvatar(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return
 
@@ -48,9 +53,9 @@ export function Profile() {
   return (
     <Container>
       <header>
-        <Link to="/">
+        <button type="button" onClick={handleBack}>
           <ArrowLeft />
-        </Link>
+        </button>
       </header>
 
       <Form>

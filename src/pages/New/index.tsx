@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { Container, Form } from './styles'
 import { Header } from '../../components/header'
@@ -9,6 +9,7 @@ import { Section } from '../../components/section'
 import { NewItem } from '../../components/newItem'
 import { Button } from '../../components/button'
 import { api } from '../../services/api'
+import { ButtonText } from '../../components/buttonText'
 
 export function New() {
   const navigation = useNavigate()
@@ -20,6 +21,10 @@ export function New() {
 
   const [newTag, setNewTag] = useState('')
   const [tags, setTags] = useState<string[]>([])
+
+  function handleBack() {
+    navigation(-1)
+  }
 
   function handleAddLink() {
     setLinks((prevState) => [...prevState, newLink])
@@ -70,7 +75,7 @@ export function New() {
     })
 
     alert('Nota criada com sucesso!')
-    navigation('/')
+    navigation(-1)
   }
 
   return (
@@ -80,7 +85,7 @@ export function New() {
         <Form>
           <header>
             <h1>Criar Nota</h1>
-            <Link to="/">Voltar</Link>
+            <ButtonText onClick={handleBack} title="Voltar" />
           </header>
 
           <Input

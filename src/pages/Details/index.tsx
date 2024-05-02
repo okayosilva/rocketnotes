@@ -24,12 +24,12 @@ interface NoteInterface {
 }
 
 export function Details() {
-  const navigate = useNavigate()
+  const navigation = useNavigate()
   const params = useParams()
   const [note, setNote] = useState<NoteInterface>()
 
-  function handleBackToHome() {
-    navigate('/')
+  function handleBack() {
+    navigation(-1)
   }
 
   async function handleRemove() {
@@ -38,7 +38,7 @@ export function Details() {
     if (confirmation) {
       await api.delete(`/notes/${params.id}`).then(() => {
         alert('Nota excluída com sucesso!')
-        return handleBackToHome()
+        return handleBack()
       })
     }
   }
@@ -88,7 +88,7 @@ export function Details() {
               )}
             </div>
 
-            <Button title="Voltar" onClick={handleBackToHome} />
+            <Button title="Voltar" onClick={handleBack} />
           </Content>
         </main>
       )}

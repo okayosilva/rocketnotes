@@ -12,13 +12,16 @@ export const Container = styled.div`
 
     background-color: ${({ theme }) => theme.COLORS['GRAY-100']};
 
-    > a {
+    > button {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       color: ${({ theme }) => theme.COLORS['GRAY-300']};
 
       transition: all 0.1s;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
 
       &:hover {
         color: ${({ theme }) => theme.COLORS.GREEN};
