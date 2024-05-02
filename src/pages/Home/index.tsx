@@ -14,6 +14,8 @@ import { ButtonText } from '../../components/buttonText'
 import { Input } from '../../components/input'
 import { Note } from '../../components/note'
 import { Section } from '../../components/section'
+
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 
@@ -29,6 +31,8 @@ interface Note {
 }
 
 export function Home() {
+  const navigate = useNavigate()
+
   const [search, setSearch] = useState<string>('')
   const [tags, setTags] = useState<Tag[]>([])
   const [tagsSelected, setTagsSelected] = useState<string[]>([])
@@ -44,6 +48,10 @@ export function Home() {
     }
 
     setTagsSelected((prevState) => [...prevState, tagName])
+  }
+
+  function handleDetails(id: number) {
+    navigate(`/details/${id}`)
   }
 
   useEffect(() => {
@@ -104,7 +112,12 @@ export function Home() {
       <Content>
         <Section title="Minhas notas">
           {notes.map((note) => (
-            <Note key={note.id} title={note.title} tags={note.tags} />
+            <Note
+              key={note.id}
+              title={note.title}
+              tags={note.tags}
+              onClick={() => handleDetails(note.id)}
+            />
           ))}
         </Section>
       </Content>
