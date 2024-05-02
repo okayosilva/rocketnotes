@@ -1,5 +1,5 @@
 import { ContainerHeader, Profile, ToggleThemeButton } from './styles'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Power } from 'lucide-react'
 
 import { useAuth } from '../../hooks/auth'
@@ -8,6 +8,12 @@ import { api } from '../../services/api'
 
 export function Header() {
   const { signOut, user } = useAuth()
+  const navigation = useNavigate()
+
+  function handleSignOut() {
+    navigation('/')
+    signOut()
+  }
 
   const avatarUrl = user?.avatar
     ? `${api.defaults.baseURL}/files/${user.avatar}`
@@ -24,7 +30,7 @@ export function Header() {
           <strong>{name}</strong>
         </div>
       </Profile>
-      <ToggleThemeButton type="button" onClick={() => signOut()}>
+      <ToggleThemeButton type="button" onClick={handleSignOut}>
         <Power size={24} />
       </ToggleThemeButton>
     </ContainerHeader>
