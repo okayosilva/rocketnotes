@@ -37,7 +37,6 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserInterface | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [token, setToken] = useState<string | null>(null)
 
   async function signIn({ email, password }: SignInCredentials): Promise<void> {
     try {
@@ -50,7 +49,6 @@ function AuthProvider({ children }: AuthProviderProps) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`
 
       setUser(user)
-      setToken(token)
     } catch (error) {
       if ((error as any).response) {
         alert((error as any).response.data.message)
@@ -97,7 +95,6 @@ function AuthProvider({ children }: AuthProviderProps) {
     if (token && user) {
       api.defaults.headers.common.Authorization = `Bearer ${token}`
       setUser(JSON.parse(user))
-      setToken(token)
     }
   }, [])
 

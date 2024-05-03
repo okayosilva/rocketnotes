@@ -20,7 +20,7 @@ export function Profile() {
   const [oldPassword, setOldPassword] = useState('')
 
   const avatarUrl = `${api.defaults.baseURL}/files/${user!.avatar}`
-  const avatarValid = user?.avatar ? user?.avatar : avatarPlaceholder
+  const avatarValid = avatarPlaceholder
 
   const [avatar, setAvatar] = useState(user?.avatar ? avatarUrl : avatarValid)
   const [avatarFile, setAvatarFile] = useState<File>()
