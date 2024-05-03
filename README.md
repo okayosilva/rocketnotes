@@ -1,30 +1,61 @@
-# React + TypeScript + Vite
+Status: Completo 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Rocket Notes
+Rocket Notes é uma aplicação que permite a você registrar suas anotações, além de inserir links e tags em cada nota. Também é possível filtrar suas notas pelos temas cadastrados através das tags.
 
-Currently, two official plugins are available:
+## Funcionalidades:
+ * Criação de usuário
+ * Atualização de usuário
+ * Autenticação de usuário (Token JWT)
+ * Criação de notas
+ * Listagem de notas
+ * Filtro de notas
+ * Detalhes das notas
+ * Exclusão de notas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<hr/>
+<br/>
 
-## Expanding the ESLint configuration
+<center> 
+<div><img src="./src/assets/login.png" /> <img src="./src/assets/cad.png" /></div>
+ <div><img src="./src/assets/notes.png" /> <img src="./src/assets/note.png" /></div>
+<div><img src="./src/assets/profile.png" /></div>
+</center>
+<br/>
+<hr/>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tecnologias Utilizadas:
 
-- Configure the top-level `parserOptions` property like this:
+ * React
+ * styled-components
+ * Lucide React
+ * prettier plugin tailwindcss
+ * typescript
+ * eslint
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Back-End 
+<a href="https://github.com/okayosilva/rocketnotes-api">Acesse</a>
+
+<hr/>
+
+ ## Demonstração:
+ 
+<div>
+    <a href="https://rocketnotes-5ee3.vercel.app/">Acesse</a>
+</div>
+
+## Instalação
+  * Faça um clone do repositório do projeto no GitHub.
+  * Navegue até o diretório do projeto.
+  * Execute o seguinte comando para instalar as dependências:
+
+```
+$ pnpm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Running the project
+```
+$ pnpm run dev
+```
+
+
