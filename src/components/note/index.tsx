@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react'
-import { Tag } from '../tag'
+import { Tag } from '../tags'
 import { Container } from './styles'
 
 type NoteData = {
